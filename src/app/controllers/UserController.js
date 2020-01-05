@@ -1,7 +1,13 @@
-const User = require("./../models/User");
-let Yup = require("yup");
+import User from "./../models/User";
+import * as Yup from "yup";
 
 class UserController {
+    async index(req, res) {
+        const users = User.findAll({
+            where: {}
+        });
+    }
+
     async store(req, res) {
         const schema = Yup.object().shape({
             name: Yup.string().required(),
@@ -30,8 +36,8 @@ class UserController {
     }
 
     async update(req, res) {
-        console.log(req.userId);
         return res.json({ ok: true });
     }
 }
-module.exports = new UserController();
+
+export default new UserController();
